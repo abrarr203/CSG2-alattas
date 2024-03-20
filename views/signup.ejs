@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
+</head>
+<body>
+ <div class="wrapper">
+<!-- {{!----------------------------- Form box -----------------------------------}} -->
+    <div class="form-box">
+        <!-- {{!------------------- registration form --------------------------}} -->
+        <div class="login-container" id="signup">
+            <form action="/signup" method="post">
+                <div class="top">
+                    <header>Sign Up</header>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="firstName" name="firstName" placeholder="First Name" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="lastName" name="lastName" placeholder="Last Name" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <input type="email" class="input-field" id="email" name="email" placeholder="Email" required>
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="password" name="password" placeholder="Password" max="20" min="8" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="configPass" name="confirm" placeholder="Confirm Password" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <!-- {{#if message}}
+                    <h4 style="color: darkred;">{{message}}</h4>
+                {{/if}} -->
+                <div class="input-box">
+                    <input type="submit" class="submit" value="SignUp">
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="register-check">
+                        <label for="register-check"> Remember Me</label>
+                    </div>
+                    <div class="two">
+                        <span>Have an account? <label><a href="/login">Login</a></label></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>   
+</body>
+</html>
