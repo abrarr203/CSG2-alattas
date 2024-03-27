@@ -15,5 +15,6 @@ router.get('/signup', registrationController.showRegisterForm);
 router.post('/signup', registrationController.createUsers);
 
 router.get('/home', loginController.isLoggedIn ,homeController.showHome);
+router.post('/logout', loginController.logout);
 
 module.exports = router;

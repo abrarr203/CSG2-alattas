@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
 </head>
 <body>
@@ -29,16 +29,22 @@
         </div>
         <div class="profile-section">
             <div class="profile-img">
-                <img src="/img/photo_2022-05-06_16-15-47.jpg" alt="">
+                <% if (userPhoto) { %>
+                    <img src="data:image/*;base64, <%= userPhoto %>" alt="">
+                <% } else { %>
+                    <img src="/img/user.png" alt="">    
+                <% } %>
             </div>
             <div class="dropdown">
                 <div class="username">
                     <a href="" class="btn-name">
-                        ,vlf,l,dlc,ld,ld,
+                        <%= user.firstName + " " + user.lastName %>
                     <i class="bx bx-chevron-down"></i></a>
                 </div>
                 <div class="dropdown-content">
-                    <a href="login" class="logout">Log out</a>
+                    <form action="/logout" method="post">
+                        <button type="submit" class="logout">Log out</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -62,66 +68,23 @@
                 </div>
             </div>
             <div class="podcast-cards">
-                <div class="podcast-card">
-                    <div class="podcast-img">
-                        <img src="img/photo_2022-05-06_16-15-47.jpg" alt="">
-                        <div class="icons">
-                            <i class="bx bxs-heart"></i>
-                            <i class="bx bx-play-circle"></i>
+                <% podcasts.forEach((element) => { %>
+                    <div class="podcast-card">
+                        <div class="podcast-img">
+                            <img src="data:image/*;base64, <%= element.photo %>" alt="">
+                            <div class="icons">
+                                <i class="bx bxs-heart"></i>
+                                <i class="bx bx-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="podcast-name">
+                            <p><%= element.name %></p>
+                        </div>
+                        <div class="podcaster-name">
+                            <p><%= element.firstName + " " + element.lastName %></p>
                         </div>
                     </div>
-                    <div class="podcast-name">
-                        <p>Podcast Title</p>
-                    </div>
-                    <div class="podcaster-name">
-                        <p>Podcaster name</p>
-                    </div>
-                </div>
-                <div class="podcast-card">
-                    <div class="podcast-img">
-                        <img src="img/photo_2022-05-06_16-15-47.jpg" alt="">
-                        <div class="icons">
-                            <i class="bx bxs-heart"></i>
-                            <i class="bx bx-play-circle"></i>
-                        </div>
-                    </div>
-                    <div class="podcast-name">
-                        <p>Podcast Title</p>
-                    </div>
-                    <div class="podcaster-name">
-                        <p>Podcaster name</p>
-                    </div>
-                </div>
-                <div class="podcast-card">
-                    <div class="podcast-img">
-                        <img src="img/photo_2022-05-06_16-15-47.jpg" alt="">
-                        <div class="icons">
-                            <i class="bx bxs-heart"></i>
-                            <i class="bx bx-play-circle"></i>
-                        </div>
-                    </div>
-                    <div class="podcast-name">
-                        <p>Podcast Title</p>
-                    </div>
-                    <div class="podcaster-name">
-                        <p>Podcaster name</p>
-                    </div>
-                </div>
-                <div class="podcast-card">
-                    <div class="podcast-img">
-                        <img src="img/photo_2022-05-06_16-15-47.jpg" alt="">
-                        <div class="icons">
-                            <i class="bx bxs-heart"></i>
-                            <i class="bx bx-play-circle"></i>
-                        </div>
-                    </div>
-                    <div class="podcast-name">
-                        <p>Podcast Title</p>
-                    </div>
-                    <div class="podcaster-name">
-                        <p>Podcaster name</p>
-                    </div>
-                </div>
+                <% }) %>
             </div>
         </div>
         <div class="container">
@@ -137,6 +100,7 @@
             </div>
             <div class="progress-area">
               <div class="progress-bar">
+                <!--data:audio/wav;base64, podcast.audio-->
                 <audio id="main-audio" src=""></audio>
               </div>
               <div class="song-timer">

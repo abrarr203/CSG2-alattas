@@ -3,24 +3,25 @@ const registrationModel = require('../models/registrationModel');
 class RegistrationController{
     // Get Request
     static async showRegisterForm(req, res){
-        res.render('signup');
+        res.render('signup', {message: ""});
     }
 
     // Post Request
     static async createUsers(req, res){
-        console.log(req.body);
-        const {firstName, lastName, email, password, confirm} = req.body;
-        const emailExists = await registrationModel.isEmailExists(email);
-
-        if(emailExists){
-            return res.render('signup', {message: 'Email already exists'});
-        } 
-        else if(password != confirm) {
-            return res.render('signup', {message: 'Password not match'});
+        let userData = {
+            firstName: req.body.firstName, 
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+        };
+        // ماكو تحقق من الباسوورد اذا يتطابق او لا 
+        try{
+            await registrationModel.createUsers(userData);
+            return res.redirect('/login');
+        } catch(error){
+            console.log(error);
+            res.render('signup', {message: 'Email already exist'});
         }
-        registrationModel.createUsers(firstName, lastName, email, password);
-        console.log('User created successfully');
-        return res.redirect('/login');
     }
 }
 

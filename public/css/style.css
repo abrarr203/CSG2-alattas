@@ -333,7 +333,6 @@ header{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    box-shadow: 1px 1px 1px #c1bbc6;
 }
 .dropdown {
     position: relative;
@@ -348,7 +347,6 @@ header{
     width: 100px;
     padding: 10px;
     margin-top: 5px;
-    margin-left: 15px;
     text-align: center;
     z-index: 1;
 }
@@ -382,8 +380,10 @@ header{
     gap: 15px;
     padding-left: 120px;
     padding-top: 10px;
+    margin: 10px 50px 10px;
 }
 .week-trend{
+    margin-top: 8rem;
     background-color: #ebebeb;
     border-radius: 30px;
     height: 22rem;
@@ -405,6 +405,7 @@ header{
     border-radius: 10px;
 }
 .trending-podcasts{
+    margin-top: 8rem;
     background-color: #ebebeb;
     border-radius: 30px;
     height: 22rem;
