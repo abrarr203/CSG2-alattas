@@ -14,13 +14,18 @@ class RegistrationController{
             email: req.body.email,
             password: req.body.password,
         };
-        // ماكو تحقق من الباسوورد اذا يتطابق او لا 
+        let isEmailExist = await registrationModel.isEmailExist(userData.email);
+        if(isEmailExist){
+            res.render('signup', {message: 'Email already exist'});
+        }
+        if(req.body.confirm !== userData.password){
+            res.render('signup', {message: 'Password did not match'});
+        }
         try{
             await registrationModel.createUsers(userData);
             return res.redirect('/login');
         } catch(error){
-            console.log(error);
-            res.render('signup', {message: 'Email already exist'});
+            return error;
         }
     }
 }

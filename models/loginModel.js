@@ -1,25 +1,8 @@
 const db = require('../data/database');
+const {userData} = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 class LoginModel{
-
-    static findByEmail(email){
-        return new Promise((resolve, rej) => {
-            try{
-                db.query('SELECT * FROM users WHERE email=?', [email], 
-                (error, result) => {
-                    if(error){
-                        rej(error);
-                    } else {
-                        let user = result[0];
-                        resolve(user);
-                    }
-                });
-            } catch(err){
-                rej(err);
-            }
-        });
-    }
 
     static comparePassword(password, hashedPassword){
         return new Promise(async (resolve, rej) =>{
@@ -28,9 +11,9 @@ class LoginModel{
                 if(isMatch){
                     resolve(true);
                 }
-                resolve(`The password that you've entered is incorrect`);
+                resolve(false);
             } catch(error){
-                rej(error);
+                rej('Login Model Error (comparePassword): ', error);
             }
         });
     };
@@ -38,21 +21,21 @@ class LoginModel{
     static login(email, password){
         return new Promise(async (resolve, rej) => {
             try{
-                let user = await this.findByEmail(email);
+                let user = await userData(email);
+                console.log(user);
                 if(user){
                     let isMatch = await bcrypt.compare(password, user.password);
                     if(isMatch){
                         resolve(true);
                     } else {
-                        let message = `The password that you've entered is incorrect`;
-                        rej(message);
+                        resolve(false);
                     }
                 } else {
-                    let message = `This user email "${email}" doesn't exist`;
-                    rej(message);
+                    resolve(false);
                 }
             } catch(error){
-                rej(error);
+                rej('Login Model Error: ',error);
+                throw error;
             }
         });
     };

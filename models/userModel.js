@@ -6,7 +6,7 @@ let userData = (email) => {
             db.query('SELECT * FROM users WHERE email=?', [email], 
             (error, result) => {
                 if(error){
-                    rej(error);
+                    rej( 'User Model Error (userData): ', error);
                 } else {
                     let user = result[0];
                     console.log(user);
@@ -14,7 +14,7 @@ let userData = (email) => {
                 }
             });
         } catch(err){
-            rej(err);
+            rej('User Model Error: ', err);
         }
     });
 };
