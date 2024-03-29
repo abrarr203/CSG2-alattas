@@ -29,8 +29,8 @@
         </div>
         <div class="profile-section">
             <div class="profile-img">
-                <% if (userPhoto) { %>
-                    <img src="data:image/*;base64, <%= userPhoto %>" alt="">
+                <% if (user.photo) { %>
+                    <img src="data:image/*;base64, <%= user.photo %>" alt="">
                 <% } else { %>
                     <img src="/img/user.png" alt="">    
                 <% } %>
@@ -54,12 +54,14 @@
     </div>
     <div class="trending">
         <div class="week-trend">
-            <p>Trending this week</p>
+            <p>Most Popular Podcast</p>
             <div class="week-trend-img">
-                <img src="/img/photo_2022-05-06_16-15-47.jpg" alt="">
+                <img src="data:image/*; base64, <%= mostPopularPodcast.photo %>" alt="">
                 <div class="icons-one">
-                    <button class="icon-btn" name="favorite"><i class="bx bxs-heart"></i></button>
-                    <button class="icon-btn" name="start"><i class="bx bx-play-circle"></i></button>
+                    <form action="home/<%= user.userId %>/addLike/<%= mostPopularPodcast.podcastId %>" method="post">
+                        <button type="submit"><i class="bx bxs-heart"></i></button>
+                    </form>
+                    <a href="home/listening/<%= mostPopularPodcast.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
                 </div> 
             </div>
         </div>
@@ -77,8 +79,10 @@
                         <div class="podcast-img">
                             <img src="data:image/*;base64, <%= element.photo %>" alt="">
                             <div class="icons">
-                                <button class="icon-btn" name="favorite"><i class="bx bxs-heart"></i></button>
-                                <button class="icon-btn" name="start"><i class="bx bx-play-circle"></i></button>
+                                <form action="home/<%= user.userId %>/addLike/<%= element.podcastId %>" method="post">
+                                    <button type="submit"><i class="bx bxs-heart"></i></button>
+                                </form>
+                                <a href="home/listening/<%= element.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
                             </div>
                         </div>
                         <div class="podcast-name">

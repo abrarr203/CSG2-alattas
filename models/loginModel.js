@@ -22,7 +22,6 @@ class LoginModel{
         return new Promise(async (resolve, rej) => {
             try{
                 let user = await userData(email);
-                console.log(user);
                 if(user){
                     let isMatch = await bcrypt.compare(password, user.password);
                     if(isMatch){

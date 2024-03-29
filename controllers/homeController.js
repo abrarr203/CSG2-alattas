@@ -4,13 +4,24 @@ class HomeController{
     static async showHome(req, res){
         const user = req.session.user;
         const podcasts = await podcastModel.getAllPodcasts();
-        console.log(podcasts)
+        const mostPopularPodcast = await podcastModel.mostPopularPodcast();
+
         let convertUserPhoto, binaryUserPhoto;
         if (req.session.user.photo){
             binaryUserPhoto = req.session.user.photo;
             convertUserPhoto = Buffer.from(binaryUserPhoto).toString('base64');
+            req.session.user.photo = convertUserPhoto;
         }
+
+        const binaryMostPopularPhoto = mostPopularPodcast.photo;
+        const convertMostPopularPhoto = Buffer.from(binaryMostPopularPhoto).toString('base64');
         
+        const binaryMostPopularAudio = mostPopularPodcast.audio;
+        const convertMostPopularAudio = Buffer.from(binaryMostPopularAudio).toString('base64');
+        
+        mostPopularPodcast.photo = convertMostPopularPhoto;
+        mostPopularPodcast.audio = convertMostPopularAudio;
+
         const updatedPodcasts = [];  //  Array to store the modified data of each podcast
         for (const podcast of podcasts) {
             let convertPodcastPhoto, binaryPodcastPhoto;
@@ -20,7 +31,7 @@ class HomeController{
                 binaryPodcastPhoto = podcast.photo;
                 convertPodcastPhoto = Buffer.from(binaryPodcastPhoto).toString('base64');
             }
-            // convert audio -- :> مدري اذا يشتغل
+            // convert audio
             binaryPodcastAudio = podcast.audio;
             convertPodcastAudio = Buffer.from(binaryPodcastAudio).toString('base64');
             //  adding base64 images and audios to the array
@@ -29,8 +40,8 @@ class HomeController{
         }
         res.render('home', {
             user: user, 
-            userPhoto: convertUserPhoto, 
-            podcasts: updatedPodcasts
+            podcasts: updatedPodcasts,
+            mostPopularPodcast: mostPopularPodcast
         });        
     }
 }

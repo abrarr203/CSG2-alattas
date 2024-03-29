@@ -9,7 +9,6 @@ let userData = (email) => {
                     rej( 'User Model Error (userData): ', error);
                 } else {
                     let user = result[0];
-                    console.log(user);
                     resolve(user);
                 }
             });

@@ -7,6 +7,7 @@ const router = express.Router();
 const registrationController = require('../controllers/registrationController.js');
 const loginController = require('../controllers/loginController');
 const homeController = require('../controllers/homeController');
+const podcastController = require('../controllers/podcastController.js');
 //  Middleware
 router.get('/login', loginController.isLoggedOut ,loginController.showLoginPage);
 router.post('/login', loginController.login);
@@ -17,5 +18,7 @@ router.post('/signup', registrationController.createUsers);
 
 router.get('/home', loginController.isLoggedIn ,homeController.showHome);
 router.post('/logout', loginController.logout);
+
+router.post('/home/:userId/addLike/:podcastId', podcastController.addLike);
 
 module.exports = router;
