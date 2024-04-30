@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
+</head>
+<body>
+    <div class="main-wrapper" id="mainwrapper">
+        <!-- {{!----------------------------------------------------Navbar---------------------------------------------------------}}-->
+        <div class="menu-section">
+            <div class="logo">
+                <a href="/home"><img src="/img/logo.PNG" alt=""></a>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <a href="/profile/<%= user.userId %>"><i class="bx bx-user"></i></a>
+                </div>
+                <div class="menu-item">
+                    <a href="/home"><i class="bx bx-home"></i></a>
+                </div>
+            </div>
+        </div>
+
+         <!-- {{!----------------------------------------------------profile---------------------------------------------------------}}-->
+
+         <div class="user-profile">
+            <% if (user.photo) { %>
+                <div class="img-profile">
+                    <img src="data:image/*; base64, <%= user.photo %>" alt="" class="img">
+                </div>
+            <% } else { %>
+                <div class="img-profile">
+                    <img src="/img/user.png" alt="" class="img">
+                </div>
+            <% } %>
+
+            <div class="user">
+                <h3><%= user.firstName + " " + user.lastName %></h3>
+            </div>
+            <div class="bio">
+                <% if (user.bio) {%>
+                    <b><p><%= user.bio %></p></b>
+                <% } else { %>
+                    <b><p>user bio here you can write everything about youself freelly</p></b>
+                 <% } %>
+            </div>
+            <div class="btns">
+                <button class="btn" id="post" onclick="openForm()">Post+</button>
+                <button class="btn" id="delete" onclick=" ">Delete -</button>
+                <button class="btn" id="edit" onclick="openEditForm()">edit profile</button>
+            </div>
+            <div class="break"></div>
+        </div>
+    </div>
+    <!-- {{!----------------------------------------------------post-btn-popup---------------------------------------------------------}}-->
+    <form action="/post" method="post" enctype="multipart/form-data" >
+        <div class="container" id="popup">
+            <div class="upload-btn">
+              <input type="file" id="file-input" accept="audio/*"  class="input-aud" name="podcast" />
+              <label for="file-input" class="f-input">
+                 <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                 Choose Files To Upload
+              </label>
+              <div id="num-of-files">No Files Choosen</div>
+              <ul id="files-list"></ul>
+            </div>
+            <div class="pod">
+              <div class="pod-img-upload">
+                  <label for="photo" class="img-input">
+                      choose podcast img
+                      <i class="fa-solid fa-circle-plus" id="plus"></i>
+                  </label>
+                  <input type="file" id="photo" name="photo" accept="image/*"  onchange="loadFile(event)">
+              </div>
+              <div  class="tow">
+                  <img id="output" class="img-display" />	
+                  <input type="text" placeholder="enter name of podcast" class="name" name="name">
+              </div>
+            </div>
+            <div class="submit-btn">
+              <input type="submit" class="bttn" value="Post+" id="submit">
+              <button class="bttn" id="close" onclick="closeForm()">Cancel</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- {{!----------------------------------------------------edit-btn-popup---------------------------------------------------------}}-->
+    <form action="/update" method="post" enctype="multipart/form-data" class="form-box" id="popup2">
+        <div class="register-container" id="signup">
+                <div class="profile-img">
+                    <div class="main-imgdisplay">
+                        <img id="output2" class="img-displayy"  width="70" height="60" src="data:image/*; base64, <%= user.photo %>"/>	                         
+                    </div>
+                    <label for="photoo" class="img-input">
+                        <i class="fa-solid fa-circle-plus" id="pluss"></i>
+                    </label>  
+                    <input type="file" id="photoo" name="photoo" accept="image/*" onchange="loadFilee(event)">
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="firstName" name="firstName" value="<%= user.firstName %>">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="lastName" name="lastName" value="<%= user.lastName %>">
+                        <i class="bx bx-user"></i>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <%if(user.bio) {%>
+                        <input type="text" class="input-field" id="bio" name="bio" value="<%= user.bio %>">
+                    <% } else { %>
+                        <input type="text" class="input-field" id="bio" name="bio" placeholder="Bio">
+                    <% } %>
+                    <i class="fa-solid fa-b"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="password" name="password" placeholder="Password" max="20" min="8">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="configPass" name="configPass" placeholder="Confirm Password">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="OK">
+                    <input type="button" class="submit" value="Cancle" onclick="closeEditForm()">
+                </div>
+        </div>
+    </form>
+    <script src="/js/01.js"></script>
+</body>

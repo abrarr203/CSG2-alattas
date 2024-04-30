@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- {{!----------------------------------------------------Navbar---------------------------------------------------------}} -->
+        <div class="menu-section">
+            <div class="logo">
+                <a href="/home"><img src="/img/logo.PNG" alt=""></a>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <a href="/profile/<%= user.userId %>"><i class="bx bx-user"></i></a>
+                </div>
+                <div class="menu-item">
+                    <a href="/home"><i class="bx bx-home"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- {{!----------------------------------------------------Mid-Content---------------------------------------------------------}} -->
+        <div class="mid-section">
+            <div class="upper-nav">
+                <form action="search" method="get" class="search-bar">
+                    <input type="text" placeholder="Search" name='search' class="search" >
+                    <input type="submit">
+                    <i class="bx bx-search"></i>
+                </form>
+            </div>
+            <% results.forEach(result => { %>
+            <div class="account-result">
+                <div class="result">
+                <% if (result.type == 'user') { %>
+                    <% if (result.photo) { %>
+                  <div class="account-img">
+                      <a href="profile/<%= result.userId %>"> <img src="data:image/*; base64, <%= result.photo %> " onclick="location.href='profile.ejs'"> </a>
+                  </div>
+                  <% } else { %>
+                    <a href="profile/<%= result.userId %>"> <img src="/img/user.png" onclick="location.href='profile.ejs'"> </a>
+                   <% } %>
+                  <div class="account-name">
+                     <p class="account-name-text"><%= result.name %></p>
+                  </div>
+                </div>
+                  <% } %>
+                  <hr class="account-divider">
+                </div>
+
+                  <% if(result.type == 'podcast') { %>
+                  <div class="podcast-result">
+                    <div class="podcast-img">
+                        <a href="home/<%= result.podcastId %>"> <img src="data:image/*; base64, <%= result.photo %> " onclick="location.href='home.ejs'"> </a>
+                    </div>
+                    <div class="podcast-name">
+                    <p class="podcast-name-text"><%= result.name %></p>
+                    </div>
+                  </div>
+                  <% } %>
+            <% }) %>
+        </div>
+
+        <!-- {{!----------------------------------------------------Mid-Content---------------------------------------------------------}} -->
+        <div class="left-content">
+            <div class="profile-section">
+                <% if (user.photo) { %>
+                    <div class="profile-img">
+                        <img src="data:image/*; base64, <%= user.photo %>" alt="">
+                    </div>
+                <% } else { %>
+                    <div class="profile-img">
+                        <img src="img/user.png" alt="">
+                    </div>
+                <% } %>
+                <div class="dropdown">
+                    <div class="username">
+                        <a href="" class="btn-name">
+                                <p><%= user.firstName + ' ' + user.lastName %></p>
+                            <i class="bx bx-chevron-down"></i></a>
+                    </div>
+                    <div class="dropdown-content">
+                        <label><a class="logout" onclick="location.href='begin.ejs'">Log out</a></label>
+                    </div>
+                </div>
+            </div>
+        </div>  
+</body>
+</html>

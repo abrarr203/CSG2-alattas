@@ -33,7 +33,7 @@ class LoginModel{
                     resolve(false);
                 }
             } catch(error){
-                rej('Login Model Error: ',error);
+                rej('Login Model Error: ');
                 throw error;
             }
         });

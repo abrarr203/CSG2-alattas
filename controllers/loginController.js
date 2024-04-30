@@ -1,5 +1,7 @@
 const loginModel = require('../models/loginModel');
-const {userData} = require('../models/userModel');
+const userModel = require('../models/userModel');
+const {imageReader} = require('../js/convertPhoto.js')
+
 let isAuth = false;
 
 class LoginController{
@@ -14,8 +16,13 @@ class LoginController{
             const login = await loginModel.login(email, password);
             if(login){
                 isAuth = true; // set user as authenticated after successful login
-                const user = await userData(email);
-                req.session.user = user; //  save logged in user data to session 
+                const user = await userModel.userData(email);
+
+                req.session.user = user; //  save logged in user data to session
+
+                if(req.session.user.photo){
+                req.session.user.photo = imageReader(req.session.user.photo);
+                }
                 console.log('User login successfully');
                 return res.redirect('home');
             }
@@ -45,7 +52,7 @@ class LoginController{
             if(error){
                 console.log(error);
             }
-            return res.redirect('/login');
+            return res.redirect('/');
         });
     }
 }
