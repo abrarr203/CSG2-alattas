@@ -5,150 +5,125 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
 </head>
 <body>
-    <div class="main-wrapper">
-    <!-- {{!----------------------------------------------------Navbar---------------------------------------------------------}} -->
-        <div class="menu-section">
-            <div class="logo">
-                <a href="home"><img src="img/logo.PNG" alt=""></a>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png" alt="LOGO">
+        </div>
+        <div class="list">
+            <div class="list-item">
+                <a href=""><i class="bx bx-user"></i></a>
             </div>
-            <div class="menu-items">
-                <div class="menu-item">
-                    <a href="profile/<%= user.userId %>"><i class="bx bx-user"></i></a>
-                </div>
-                <div class="menu-item">
-                    <a href="home"><i class="bx bx-home"></i></a>
-                </div>
+            <div class="list-item">
+                <a href="#"><i class="bx bx-home"></i></a>
             </div>
         </div>
-        <!-- {{!----------------------------------------------------Mid-Content---------------------------------------------------------}} -->
-        <div class="mid-section">
-            <div class="upper-nav">
-                <form action="search" method="get" class="search-bar">
-                    <input type="text" placeholder="Search" name='search' class="search" >
-                    <input type="submit">
-                    <i class="bx bx-search"></i>
-                </form>
-            </div>
-            <div class="paragraph">
-                <p>DISCOVER PODCASTS</p>
-            </div>
-            <div class="trending">
-
-                <div class="week-trend">
-                    <p>Trending this week</p>
-                    <% if (mostPopularPodcast) { %>
-                        <div class="week-trend-img">
-                            <img src="data:image/*; base64, <%= mostPopularPodcast.photo %>" alt="">
-                            <div class="icons-one">
-                                <form action="home/<%= user.userId %>/addLike/<%= mostPopularPodcast.podcastId %>" method="post">
-                                   <button type="submit"><i class="bx bxs-heart"></i></button>
-                                </form>
-                                <a href="home/listening/<%= mostPopularPodcast.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
-                            </div>   
-                        </div>
-                    <% } else { %>
-                        <p>Not Found</p>
-                    <% } %>
-                    <div class="podcast-trend">
-                        <div class="title-trend">
-                           <p>Trending Podcast</p>
-                           <div class="arrows">
-                            <button class="left-arrow"><i class="bx bx-left-arrow"></i></button>
-                            <button class="right-arrow"><i class="bx bx-right-arrow"></i></button>
-                           </div>
-                        </div>
-                        <div class="podcast-cards">
-                            <% podcasts.forEach(pod => { %>
-                            <div class="podcast-card">
-                                <div class="podcast-img">
-                                    <img src="data:image/*; base64, <%= pod.photo %> " alt="">
-                                    <div class="icons">
-                                        <form action="home/<%= user.userId %>/addLike/<%= pod.podcastId %>" method="post">
-                                            <button type="submit"><i class="bx bxs-heart"></i></button>
-                                        </form>
-                                        <a href="home/listening/<%= pod.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
-                                    </div>            
-                                    <div class="podcast-details">
-                                       <p class="podcast-name"><%= pod.name %></p>
-                                       <p class="podcaster-name"><%= pod.firstName + " " + pod.lastName %></p>
-                                    </div>
-                                </div>
-                            </div><% }) %>
-                        </div>
-                    </div>             
-                </div>
-            </div>
+    </div>
+    <div class="top-bar">
+        <div class="search-bar">
+            <input type="text" placeholder="Search" class="search">
+            <i class="bx bx-search"></i>
         </div>
-        <!-- {{!----------------------------------------------------left-Content---------------------------------------------------------}} -->
-        <div class="left-content">
-            <div class="profile-section">
+        <div class="profile-section">
+            <div class="profile-img">
                 <% if (user.photo) { %>
-                    <div class="profile-img">
-                        <img src="data:image/*; base64, <%= user.photo %>" alt="">
-                    </div>
+                    <img src="data:image/*;base64, <%= user.photo %>" alt="">
                 <% } else { %>
-                    <div class="profile-img">
-                        <img src="img/user.png" alt="">
-                    </div>
+                    <img src="/img/user.png" alt="">    
                 <% } %>
-                <div class="dropdown">
-                    <div class="username">
-                        <a href="" class="btn-name">
-                            <p><%= user.firstName + " " + user.lastName %></p>
-                               <i class="bx bx-chevron-down"></i></a>
-                    </div>
-                    <div class="dropdown-content">
-                        <label><a class="logout" onclick="location.href='/logout'">Log out</a></label>
-                    </div>
-                </div>
             </div>
-            <div class="play-section">
-                <div class="top-bar">
-                    <span>Now Playing</span>
+            <div class="dropdown">
+                <div class="username">
+                    <a href="" class="btn-name">
+                        <%= user.firstName + " " + user.lastName %>
+                    <i class="bx bx-chevron-down"></i></a>
                 </div>
-                  <div class="img-area">
-                    <img src="img/podcastimg.JPG" alt=""> 
-                  </div>
-                  <div class="song-details">
-                    <p class="name">kjl</p>
-                    <p class="artist">mklmlk;/</p>
-                  </div>
-                  <div class="progress-area">
-                    <div class="progress-bar">
-                      <!--data:audio/wav;base64, podcast.audio-->
-                      <audio id="main-audio" src=""></audio>
-                    </div>
-                    <div class="song-timer">
-                      <span class="current-time">00:00</span>
-                      <span class="max-duration">00:00</span>
-                    </div>
-                  </div>
-                  <div class="controls">
-                    <i id="prev" class="bx bx-left-arrow"></i>
-                    <div class="play-pause">
-                      <i class="bx bx-play-circle"></i>
-                    </div>
-                    <i id="next" class="bx  bx-right-arrow"></i>
-                  </div>
-                    
-            </div>
-
-            <div class="total-section">
-                <div class="total-accounts">
-                    <p>Number Of Accounts</p>
-                        <h1><%= numberOfUsers %></h1>
-                </div> 
-                <div class="total-podcasts">
-                    <p>Number Of Podcasts</p>
-                        <h1><%= numberOfPodcasts %></h1>
-                </div>               
+                <div class="dropdown-content">
+                    <form action="/logout" method="post">
+                        <button type="submit" class="logout">Log out</button>
+                    </form>
+                </div>
             </div>
         </div>
-
+    </div>
+    <div class="paragraph">
+        <p>DISCOVER PODCASTS</p>
+    </div>
+    <div class="trending">
+        <div class="week-trend">
+            <p>Most Popular Podcast</p>
+            <div class="week-trend-img">
+                <img src="data:image/*; base64, <%= mostPopularPodcast.photo %>" alt="">
+                <div class="icons-one">
+                    <form action="home/<%= user.userId %>/addLike/<%= mostPopularPodcast.podcastId %>" method="post">
+                        <button type="submit"><i class="bx bxs-heart"></i></button>
+                    </form>
+                    <a href="home/listening/<%= mostPopularPodcast.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
+                </div> 
+            </div>
+        </div>
+        <div class="trending-podcasts">
+            <div class="title-trend">
+                <p>Trending podcasts</p>
+                <div class="arrows">
+                    <button class="left-arrow"><i class="bx bx-left-arrow"></i></button>
+                    <button class="right-arrow"><i class="bx bx-right-arrow"></i></button>
+                </div>
+            </div>
+            <div class="podcast-cards">
+                <% podcasts.forEach((element) => { %>
+                    <div class="podcast-card">
+                        <div class="podcast-img">
+                            <img src="data:image/*;base64, <%= element.photo %>" alt="">
+                            <div class="icons">
+                                <form action="home/<%= user.userId %>/addLike/<%= element.podcastId %>" method="post">
+                                    <button type="submit"><i class="bx bxs-heart"></i></button>
+                                </form>
+                                <a href="home/listening/<%= element.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a>
+                            </div>
+                        </div>
+                        <div class="podcast-name">
+                            <p><%= element.name %></p>
+                        </div>
+                        <div class="podcaster-name">
+                            <p><%= element.firstName + " " + element.lastName %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+        <div class="container">
+            <div class="top-bar">
+              <span>Now Playing</span>
+            </div>
+            <div class="img-area">
+              <img src="img/photo_2022-05-06_16-15-47.jpg" alt="img" />
+            </div>
+            <div class="song-details">
+              <p class="name">kjl</p>
+              <p class="artist">mklmlk;/</p>
+            </div>
+            <div class="progress-area">
+              <div class="progress-bar">
+                <!--data:audio/wav;base64, podcast.audio-->
+                <audio id="main-audio" src=""></audio>
+              </div>
+              <div class="song-timer">
+                <span class="current-time">00:00</span>
+                <span class="max-duration">00:00</span>
+              </div>
+            </div>
+            <div class="controls">
+              <i id="prev" class="bx bx-left-arrow"></i>
+              <div class="play-pause">
+                <i class="bx bx-play-circle"></i>
+              </div>
+              <i id="next" class="bx  bx-right-arrow"></i>
+            </div>
+          </div>
     </div> 
 <script>
     const  podcastContainers = [...document.querySelectorAll('.podcast-cards')];

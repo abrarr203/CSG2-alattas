@@ -1,6 +1,4 @@
 const podcastModel = require('../models/podcastModel');
-const UserModel = require('../models/userModel')
-const {imageReader, audioReader} = require('../js/convertPhoto.js')
 
 class HomeController{
     static async showHome(req, res){
@@ -8,30 +6,43 @@ class HomeController{
         const podcasts = await podcastModel.getAllPodcasts();
         const mostPopularPodcast = await podcastModel.mostPopularPodcast();
 
-        if(mostPopularPodcast) {
-
-        mostPopularPodcast.photo = audioReader(mostPopularPodcast.photo);
-        mostPopularPodcast.audio = audioReader(mostPopularPodcast.audio);
+        let convertUserPhoto, binaryUserPhoto;
+        if (req.session.user.photo){
+            binaryUserPhoto = req.session.user.photo;
+            convertUserPhoto = Buffer.from(binaryUserPhoto).toString('base64');
+            req.session.user.photo = convertUserPhoto;
         }
+
+        const binaryMostPopularPhoto = mostPopularPodcast.photo;
+        const convertMostPopularPhoto = Buffer.from(binaryMostPopularPhoto).toString('base64');
+        
+        const binaryMostPopularAudio = mostPopularPodcast.audio;
+        const convertMostPopularAudio = Buffer.from(binaryMostPopularAudio).toString('base64');
+        
+        mostPopularPodcast.photo = convertMostPopularPhoto;
+        mostPopularPodcast.audio = convertMostPopularAudio;
+
         const updatedPodcasts = [];  //  Array to store the modified data of each podcast
         for (const podcast of podcasts) {
-            const updatedPodcast = { ...podcast, photo: audioReader(podcast.photo), audio: audioReader(podcast.audio)};
+            let convertPodcastPhoto, binaryPodcastPhoto;
+            let convertPodcastAudio, binaryPodcastAudio;
+            // convert image
+            if (podcast.photo) {
+                binaryPodcastPhoto = podcast.photo;
+                convertPodcastPhoto = Buffer.from(binaryPodcastPhoto).toString('base64');
+            }
+            // convert audio
+            binaryPodcastAudio = podcast.audio;
+            convertPodcastAudio = Buffer.from(binaryPodcastAudio).toString('base64');
+            //  adding base64 images and audios to the array
+            const updatedPodcast = { ...podcast, photo: convertPodcastPhoto, audio: convertPodcastAudio};
             updatedPodcasts.push(updatedPodcast);
         }
-        try {
-            const numberOfPodcasts = await podcastModel.getNumberOfPodcasts();
-            const numberOfUsers = await UserModel.getNumberOfUsers();
-            res.render('home', {
-            user: user,
+        res.render('home', {
+            user: user, 
             podcasts: updatedPodcasts,
-            mostPopularPodcast: mostPopularPodcast,
-            numberOfPodcasts: numberOfPodcasts,
-            numberOfUsers: numberOfUsers
-            });
-            } catch (error) {
-            console.error(error);
-            res.status(500).send('An error occurred while retrieving the number of podcasts.');
-            }      
+            mostPopularPodcast: mostPopularPodcast
+        });        
     }
 }
 

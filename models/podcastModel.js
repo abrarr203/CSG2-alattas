@@ -19,23 +19,6 @@ class PodcastModel {
         });
     }
 
-    static getNumberOfPodcasts() {
-        return new Promise((resolve, reject) => {
-            try {
-                db.query('SELECT COUNT(*) as numberOfPodcasts FROM podcasts', (error, results) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(results[0].numberOfPodcasts);
-                    }
-                });
-            } catch (error) {
-                reject('Podcast Model Error: ' + error);
-            }
-        });
-    }
-        
-
     static mostPopularPodcast(){
         return new Promise((resolve, rej) => {
             try{
@@ -81,29 +64,6 @@ class PodcastModel {
             }
         });
     }
-
-    static createPodcast(post){
-        return new Promise(async(resolve, reject) => {
-            try{
-                let newpodcast = {
-                    name: post.name,
-                    photo: post.photo,
-                    audio: post.podcast,
-                    userId:post.userId
-                  }
-                  db.query("INSERT INTO podcasts SET ?", newpodcast, (error,result) => {
-                    if(error){
-                      throw('podcast Model Error (createPodcast): ',error);
-                    }
-                    resolve('Create a new Podcast successful');
-                  });
-            } 
-            catch(error){
-
-                throw error;
-            } 
-        });
-    };
 }
 
 module.exports = PodcastModel;
