@@ -40,7 +40,7 @@ connection.connect((error) => {
           email VARCHAR(255) NOT NULL unique,
           password NVARCHAR(255) NOT NULL,
           bio NVARCHAR(50),
-          photo  LONGBLOB
+          photo  NVARCHAR(50)
         )`;
 
         const podcastsTable = `CREATE TABLE IF NOT EXISTS podcasts (
@@ -52,14 +52,14 @@ connection.connect((error) => {
           FOREIGN KEY (userId) REFERENCES users(userId)
         )`;
 
-        const commentsTable = `CREATE TABLE IF NOT EXISTS comments (
-          commentId INT AUTO_INCREMENT PRIMARY KEY,
-          content NVARCHAR(50) NOT NULL,
-          userId INT NOT NULL,
-          podcastId INT NOT NULL,
-          FOREIGN KEY (userId) REFERENCES users(userId),
-          FOREIGN KEY (podcastId) REFERENCES podcasts(podcastId)
-        )`;
+        // const commentsTable = `CREATE TABLE IF NOT EXISTS comments (
+        //   commentId INT AUTO_INCREMENT PRIMARY KEY,
+        //   content NVARCHAR(50) NOT NULL,
+        //   userId INT NOT NULL,
+        //   podcastId INT NOT NULL,
+        //   FOREIGN KEY (userId) REFERENCES users(userId),
+        //   FOREIGN KEY (podcastId) REFERENCES podcasts(podcastId)
+        // )`;
 
         const likesTable = `CREATE TABLE IF NOT EXISTS likes (
           likeId INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,13 +85,13 @@ connection.connect((error) => {
           console.log('Podcasts table created successfully');
         });
 
-        connection.query(commentsTable, (error) => {
-          if (error) {
-            console.log(error);
-            return;
-          }
-          console.log('Comments table created successfully');
-        });
+        // connection.query(commentsTable, (error) => {
+        //   if (error) {
+        //     console.log(error);
+        //     return;
+        //   }
+        //   console.log('Comments table created successfully');
+        // });
 
         connection.query(likesTable, (error) => {
           if (error) {
