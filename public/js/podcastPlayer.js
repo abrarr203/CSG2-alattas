@@ -14,20 +14,84 @@ podcastContainers.forEach((item, i) =>{
   });
 });
 
-const playbtn = document.getElementById('play-btn');
+const playbtns = document.querySelectorAll('#play-btn');
 const podcastImg = document.getElementById('podcast-image');
 const podcastName = document.getElementById('podcast-name');
 const podcastArtist = document.getElementById('podcast-artist');
 const audio = document.getElementById('main-audio');
-const podcastList = JSON.parse('<%- JSON.stringify(podcasts) %>');
+const playController = document.getElementById('play-button');
+const progressArea = document.getElementById("progress-area");
+const progressBar = document.getElementById("progress-bar");
+const container = document.getElementById("play-section");
 
-playbtn.addEventListener('click', () => {
-  const podcastId = playbtn.dataset.podcastId;
-  console.log(podcastId)
-  const selectedPodcast = podcastList.find(podcast => podcast.podcastId === podcastId);
+let isPlaying = false;
 
-  podcastImg.src = selectedPodcast.photo;
-  podcastName.textContent = selectedPodcast.name;
-  podcastArtist.textContent = selectedPodcast.firstName + " " + selectedPodcast.lastName;
-  audio.src = selectedPodcast.audio;
+playbtns.forEach(playbtn => {
+    playbtn.addEventListener("click", (event) => {
+        const podcastData = JSON.parse(event.target.dataset.podcast);
+        console.log(podcastData);
+
+        podcastImg.src = '/audio/' + podcastData.photo;
+        podcastName.textContent = podcastData.name;
+        podcastArtist.textContent = podcastData.firstName + ' ' + podcastData.lastName;
+        audio.src = '/audio/' + podcastData.audio;
+        playMusic();
+    });
 });
+
+playController.addEventListener('click', () => {
+    isPlaying ? pauseMusic() : playMusic();
+});
+
+function playMusic() {
+    isPlaying = true;          
+    audio.play();
+};
+
+function pauseMusic() {
+    isPlaying = false;
+    audio.pause();
+};
+
+audio.addEventListener("timeupdate", (e) => {
+    const currentTime = e.target.currentTime;
+    const duration = e.target.duration;
+    let progressWidth = (currentTime / duration) * 100;
+    progressBar.style.width = `${progressWidth}%`;
+    let podcastCurrentTime = document.getElementById("current-time"),
+    podcastDuration = document.getElementById("max-duration");
+  
+    audio.addEventListener("loadeddata", () => {
+        const interval = setInterval(() => {
+        const _elapsed = audio.currentTime;
+        podcastCurrentTime.innerHTML = formatTime(_elapsed);
+    }, 1000);
+        const _duration = audio.duration;
+        podcastDuration.innerHTML = formatTime(_duration);
+        audio.addEventListener("ended", () => {
+            clearInterval(interval);
+        });
+    });
+});
+progressArea.addEventListener("click", (e) => {
+    let progressWidth = progressArea.clientWidth;
+    let clickedOffsetX = e.offsetX;
+    let podcastDuration = audio.duration;
+  
+    audio.currentTime = (clickedOffsetX / progressWidth) * podcastDuration;
+    playMusic();
+});
+function formatTime(time) {
+    if (time && !isNaN(time)) {
+      const minutes =
+        Math.floor(time / 60) < 10
+          ? `0${Math.floor(time / 60)}`
+          : Math.floor(time / 60);
+      const seconds =
+        Math.floor(time % 60) < 10
+          ? `0${Math.floor(time % 60)}`
+          : Math.floor(time % 60);
+      return `${minutes}:${seconds}`;
+    }
+    return "00:00";
+}
