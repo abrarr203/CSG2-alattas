@@ -4,26 +4,26 @@ const {imageReader, audioReader} = require('../js/convertPhoto.js')
 
 class HomeController{
     static async showHome(req, res){
-        const user = req.session.user;
-        const podcasts = await podcastModel.getAllPodcasts();
-        const mostPopularPodcast = await podcastModel.mostPopularPodcast();
-
-        if(mostPopularPodcast) {
-
-        mostPopularPodcast.photo = audioReader(mostPopularPodcast.photo);
-        mostPopularPodcast.audio = audioReader(mostPopularPodcast.audio);
-        }
-        const updatedPodcasts = [];  //  Array to store the modified data of each podcast
-        for (const podcast of podcasts) {
-            const updatedPodcast = { ...podcast, photo: audioReader(podcast.photo), audio: audioReader(podcast.audio)};
-            updatedPodcasts.push(updatedPodcast);
-        }
         try {
+            const user = req.session.user;
+            const podcasts = await podcastModel.getAllPodcasts();
+            const mostPopularPodcast = await podcastModel.mostPopularPodcast();
+    
+            // if(mostPopularPodcast) {
+    
+            // mostPopularPodcast.photo = audioReader(mostPopularPodcast.photo);
+            // mostPopularPodcast.audio = audioReader(mostPopularPodcast.audio);
+            // }
+            // const updatedPodcasts = [];  //  Array to store the modified data of each podcast
+            // for (const podcast of podcasts) {
+            //     const updatedPodcast = { ...podcast, photo: audioReader(podcast.photo), audio: audioReader(podcast.audio)};
+            //     updatedPodcasts.push(updatedPodcast);
+            // }
             const numberOfPodcasts = await podcastModel.getNumberOfPodcasts();
             const numberOfUsers = await UserModel.getNumberOfUsers();
             res.render('home', {
             user: user,
-            podcasts: updatedPodcasts,
+            podcasts:podcasts,
             mostPopularPodcast: mostPopularPodcast,
             numberOfPodcasts: numberOfPodcasts,
             numberOfUsers: numberOfUsers

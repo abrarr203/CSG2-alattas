@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    <title>Home</title>
+    <title>Profile: <%= user.firstName + " " + user.lastName %></title>
     <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
 </head>
 <body>
@@ -35,7 +35,7 @@
          <div class="user-profile">
             <% if (user.photo) { %>
                 <div class="img-profile">
-                    <img src="data:image/*; base64, <%= user.photo %>" alt="" class="img">
+                    <img src="/img/<%= user.photo %>" alt="" class="img">
                 </div>
             <% } else { %>
                 <div class="img-profile">

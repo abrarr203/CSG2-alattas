@@ -1,5 +1,4 @@
 const SearchModel = require('../models/searchModel');
-const { imageReader, audioReader} = require('../js/convertPhoto');
 
 class SearchController{
 
@@ -9,11 +8,7 @@ class SearchController{
 
     static async search(req, res){
         let results = await SearchModel.search(req.query.search)
-        results.forEach(result => {
-            if (result.photo) {
-                result.photo = imageReader(result.photo);
-            }
-          });
+
         res.render('search', {results: results, user: req.session.user})
     }
 }

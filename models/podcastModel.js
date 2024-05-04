@@ -104,6 +104,19 @@ class PodcastModel {
             } 
         });
     };
+
+    static async getPodcastById(podcastId){
+        return new Promise((resolve, rej)=>{
+            db.query('SELECT * FROM podcasts WHERE podcastId=?', podcastId, 
+            (error, result) => {
+                if(error){
+                    rej(error);
+                } else {
+                    resolve(result[0]);
+                }
+            });
+        });
+    };
 }
 
 module.exports = PodcastModel;

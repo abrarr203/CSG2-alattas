@@ -301,7 +301,7 @@ body{
     background-color: #ebebeb;
     border-radius: 30px;
     height: 22rem;
-    width: 15rem;
+    width: 20rem;
     box-shadow: 3px 4px 7px #c1bbc6;
     justify-items: center;
     align-items: center;
@@ -404,7 +404,7 @@ body{
     color: black;
     transition: color 0.3s ease;
 }
-.controls .play-pause {
+.controls .play-button {
     height: 54px;
     width: 54px;
     display: flex;
@@ -413,10 +413,10 @@ body{
     justify-content: center;
     border-radius: 50%;
 }
-.controls .play-pause i:hover {
+.controls .play-button i:hover {
     color: blue;
 }  
-.play-pause i {
+.play-button i {
     color:rgb(8, 8, 8);
     font-size: 35px;
     text-align: center;
@@ -431,7 +431,7 @@ body{
     background-color: #ebebeb;
     border-radius: 30px;
     height: 10.2rem;
-    width: 15rem;
+    width: 17rem;
     box-shadow: 3px 4px 7px #c1bbc6;
     justify-items: center;
 }
@@ -451,3 +451,48 @@ body{
 .total-podcasts {
     margin-top: -1px;
 }
+
+/*------------------------------------*/
+
+.disk{
+    position: relative;
+    display: block;
+    margin: 40px auto ;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-image: url('images/cover1.jpg');
+    background-size: cover;       
+    box-shadow: 0 0 0 10px rgb(192, 191, 191); /*rgba(255, 255 , 255, 0.08);
+*/animation: rotate 20s linear infinite;/* تدور القرص*/
+animation-play-state: paused;
+}
+.disk.play{
+    animation-play-state: running;
+}
+.disk::before{
+    content: '';
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background:  rgb(192, 191, 191);
+}
+@keyframes rotate{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform:rotate(360deg) ;
+    }
+}
+.disk.play{
+    animation-play-state: running;
+}
+
+.hidden {
+    display: none;
+  }

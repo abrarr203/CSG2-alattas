@@ -50,7 +50,7 @@ router.post('/signup', registrationController.createUsers);
 router.get('/home', loginController.isLoggedIn, homeController.showHome);
 router.post('/home/:userId/addLike/:podcastId', loginController.isLoggedIn, podcastController.addLike);
 router.get('/search', loginController.isLoggedIn, SearchController.search)
-
+router.get('/home/podcasts', podcastController.getPodcastById)
 //router.get('/home/:podcastId')
 
 router.get('/profile/:userId', loginController.isLoggedIn, userController.showProfilePage)

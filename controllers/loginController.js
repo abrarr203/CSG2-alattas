@@ -1,6 +1,5 @@
 const loginModel = require('../models/loginModel');
 const userModel = require('../models/userModel');
-const {imageReader} = require('../js/convertPhoto.js')
 
 let isAuth = false;
 
@@ -20,9 +19,6 @@ class LoginController{
 
                 req.session.user = user; //  save logged in user data to session
 
-                if(req.session.user.photo){
-                req.session.user.photo = imageReader(req.session.user.photo);
-                }
                 console.log('User login successfully');
                 return res.redirect('home');
             }

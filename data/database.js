@@ -46,8 +46,8 @@ connection.connect((error) => {
         const podcastsTable = `CREATE TABLE IF NOT EXISTS podcasts (
           podcastId INT AUTO_INCREMENT PRIMARY KEY,
           name NVARCHAR(50) NOT NULL,
-          photo LONGBLOB NOT NULL,
-          audio LONGBLOB NOT NULL,
+          photo NVARCHAR(50) NOT NULL,
+          audio NVARCHAR(50) NOT NULL,
           userId INT NOT NULL,
           FOREIGN KEY (userId) REFERENCES users(userId)
         )`;

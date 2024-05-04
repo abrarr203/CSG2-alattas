@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/css/search.css">
+    <title>Search</title>
     <link rel="icon" type="image/png" href="/img/Download_Vector_illustrations_concept_design_podcast_channel__for_free-removebg-preview.png">
 </head>
 
@@ -31,7 +32,7 @@
             <div class="upper-nav">
                 <form action="search" method="get" class="search-bar">
                     <input type="text" placeholder="Search" name='search' class="search" >
-                    <input type="submit">
+                    <input type="submit" class="hidden">
                     <i class="bx bx-search"></i>
                 </form>
             </div>
@@ -41,7 +42,7 @@
                 <% if (result.type == 'user') { %>
                     <% if (result.photo) { %>
                   <div class="account-img">
-                      <a href="profile/<%= result.userId %>"> <img src="data:image/*; base64, <%= result.photo %> " onclick="location.href='profile.ejs'"> </a>
+                      <a href="profile/<%= result.userId %>"> <img src="/img/<%= result.photo %>" onclick="location.href='profile.ejs'"> </a>
                   </div>
                   <% } else { %>
                     <a href="profile/<%= result.userId %>"> <img src="/img/user.png" onclick="location.href='profile.ejs'"> </a>
@@ -57,7 +58,7 @@
                   <% if(result.type == 'podcast') { %>
                   <div class="podcast-result">
                     <div class="podcast-img">
-                        <a href="home/<%= result.podcastId %>"> <img src="data:image/*; base64, <%= result.photo %> " onclick="location.href='home.ejs'"> </a>
+                        <a href="home/<%= result.podcastId %>"> <img src="/audio/<%= result.photo %>" onclick="location.href='home.ejs'"> </a>
                     </div>
                     <div class="podcast-name">
                     <p class="podcast-name-text"><%= result.name %></p>
@@ -72,11 +73,11 @@
             <div class="profile-section">
                 <% if (user.photo) { %>
                     <div class="profile-img">
-                        <img src="data:image/*; base64, <%= user.photo %>" alt="">
+                        <img src="/img/<%= user.photo %>" alt="">
                     </div>
                 <% } else { %>
                     <div class="profile-img">
-                        <img src="img/user.png" alt="">
+                        <img src="/img/user.png" alt="">
                     </div>
                 <% } %>
                 <div class="dropdown">
