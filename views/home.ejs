@@ -39,20 +39,19 @@
             <div class="trending">
                 <div class="week-trend">
                     <p>Most Popular Podcast</p>
-                    <% if (mostPopularPodcast) { %>
                         <div class="week-trend-img">
+                        <% if (mostPopularPodcast) { %>
                             <img src="/audio/<%= mostPopularPodcast.photo %>" alt="">
                             <div class="icons-one">
                                 <form action="home/<%= user.userId %>/addLike/<%= mostPopularPodcast.podcastId %>" method="post">
                                    <button type="submit"><i class="bx bxs-heart"></i></button>
                                 </form>
                                 <button class="icon-btn"><i data-podcast="<%= JSON.stringify(mostPopularPodcast) %>" id="play-btn" class="bx bx-play-circle"></i></button>
-                                <!-- <a href="home/listening/<%= mostPopularPodcast.podcastId %>" class="icon-btn" name="start"><i class="bx bx-play-circle"></i></a> -->
                             </div>   
+                        <% } else { %>
+                            <p>Not Found</p>
+                        <% } %>
                         </div>
-                    <% } else { %>
-                        <p>Not Found</p>
-                    <% } %>
                     <div class="podcast-trend">
                         <div class="title-trend">
                            <p>Podcasts</p>
