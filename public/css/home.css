@@ -10,6 +10,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    cursor: default;
+
 }
 body{
     /*background: linear-gradient(to bottom right,#112d60, #b6c0c5);
@@ -123,8 +125,8 @@ body{
 .week-trend{
     background-color: #ebebeb;
     border-radius: 30px;
-    height: 33rem;
-    width: 60rem;
+    height: 43rem;
+    width: 65rem;
     box-shadow: 3px 4px 7px #c1bbc6;
     justify-items: center;
 }
@@ -135,12 +137,12 @@ body{
 }
 
 .week-trend-img{
-    padding-left: 215px;
+    padding-left: 275px;
 }
 
 .week-trend img{
-    width: 33rem;
-    height: 10rem;
+    width: 30rem;
+    height: 20rem;
     border-radius: 10px;
 }
 
@@ -148,9 +150,16 @@ body{
     position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 7rem;
-    bottom: -19rem;
-    left: 45rem;
+    gap: 15rem;
+    bottom: -28.4rem;
+    left: 44.5rem;
+}
+.icons-one button{
+    border: none;
+    background: none;
+}
+.icons-one button i{
+    font-size: 26px;
 }
 
 /*----------------------------------------------------podcast-trend---------------------------------------------------------*/
@@ -171,7 +180,6 @@ body{
     background-color: transparent;
     height: 35px;
     width: 35px;
-    cursor: pointer;
 }
 .arrows button i{
     font-size: 25px;
@@ -300,8 +308,8 @@ body{
 .play-section{
     background-color: #ebebeb;
     border-radius: 30px;
-    height: 22rem;
-    width: 20rem;
+    height: 30rem;
+    width: 22rem;
     box-shadow: 3px 4px 7px #c1bbc6;
     justify-items: center;
     align-items: center;
@@ -309,6 +317,7 @@ body{
     flex-direction: column;
     overflow: hidden;
     cursor: default;
+
 }
 
 .progress-area .song-timer,.controls,.music-list .header,.music-list ul li {
@@ -331,7 +340,7 @@ body{
     margin-top: 15px;
     padding-left: 12px;
     width: 100%;
-    height: 13rem;
+    height: 20rem;
     border-radius: 15px;
     box-shadow: 0px 6px 12px var(--lightbshadow);
 }
@@ -360,7 +369,6 @@ body{
     padding: 0 15px 0;
     border-radius: 50px;
     background: #cac9c9;
-    cursor: pointer;
 }
 .progress-area .progress-bar {
     height: inherit;
@@ -408,7 +416,6 @@ body{
     height: 54px;
     width: 54px;
     display: flex;
-    cursor: pointer;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -430,8 +437,8 @@ body{
 .total-section{
     background-color: #ebebeb;
     border-radius: 30px;
-    height: 10.2rem;
-    width: 17rem;
+    height: 12rem;
+    width: 22rem;
     box-shadow: 3px 4px 7px #c1bbc6;
     justify-items: center;
 }
@@ -454,44 +461,7 @@ body{
 
 /*------------------------------------*/
 
-.disk{
-    position: relative;
-    display: block;
-    margin: 40px auto ;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background-image: url('images/cover1.jpg');
-    background-size: cover;       
-    box-shadow: 0 0 0 10px rgb(192, 191, 191); /*rgba(255, 255 , 255, 0.08);
-*/animation: rotate 20s linear infinite;/* تدور القرص*/
-animation-play-state: paused;
-}
-.disk.play{
-    animation-play-state: running;
-}
-.disk::before{
-    content: '';
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background:  rgb(192, 191, 191);
-}
-@keyframes rotate{
-    0%{
-        transform: rotate(0);
-    }
-    100%{
-        transform:rotate(360deg) ;
-    }
-}
-.disk.play{
-    animation-play-state: running;
-}
+
 
 .hidden {
     display: none;

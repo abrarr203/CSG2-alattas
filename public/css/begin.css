@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Dancing Script', cursive;
+  cursor: default;
 }
 .container{
   width:100 ;
@@ -94,6 +95,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 .card2{
   background-image: url(/img/2.JPG);
@@ -108,6 +111,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 .card3{
   background-image: url(/img/3.JPG);
@@ -122,6 +127,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 .card4{
   background-image: url(/img/4.JPG);
@@ -136,6 +143,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 .card5{
   background-image: url(/img/5.JPG);
@@ -150,6 +159,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 .card6{
   background-image: url(/img/6.JPG);
@@ -164,6 +175,8 @@ button:hover , button:focus , button:active{
   background-position: center;
   background-size: cover;
   transition: trancform 0.5s;
+  cursor: default;
+
 }
 
 .card1:hover{
