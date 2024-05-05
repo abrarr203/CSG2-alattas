@@ -31,6 +31,7 @@ playbtns.forEach(playbtn => {
         const podcastData = JSON.parse(event.target.dataset.podcast);
         console.log(podcastData);
 
+
         podcastImg.src = '/audio/' + podcastData.photo;
         podcastName.textContent = podcastData.name;
         podcastArtist.textContent = podcastData.firstName + ' ' + podcastData.lastName;
@@ -95,3 +96,52 @@ function formatTime(time) {
     }
     return "00:00";
 }
+
+const allPodcasts =JSON.parse(document.getElementById('allPodcasts').getAttribute('data-podcastList'));
+
+const nextAudio = document.getElementById('next');
+const prevAudio = document.getElementById('prev');
+
+nextAudio.addEventListener('click', (event)=> {
+  const podcastId = Number(nextAudio.getAttribute('value')); // podcast id
+  const prev = Number(prevAudio.getAttribute('value'));
+  const nextPodcast = allPodcasts.find(podcast => podcast.podcastId === podcastId);
+  console.log(nextPodcast)
+  if(nextPodcast){
+    nextAudio.setAttribute('value', podcastId + 1);
+    prevAudio.setAttribute('value', prev + 1);
+    podcastImg.src = '/audio/' +nextPodcast.photo;
+    podcastName.textContent = nextPodcast.name;
+    podcastArtist.textContent = nextPodcast.firstName + ' ' + nextPodcast.lastName;
+    audio.src = '/audio/' + nextPodcast.audio;
+    playMusic();
+  } else {
+      nextAudio.setAttribute('value', 1);
+  }
+});
+
+prevAudio.addEventListener('click', (event)=> {
+  const podcastId = Number(prevAudio.getAttribute('value'));
+  const next = Number(nextAudio.getAttribute('value'));
+  const prevPodcast = allPodcasts.find(podcast => podcast.podcastId === podcastId);;
+  console.log(prevPodcast);
+  if(prevPodcast){
+    prevAudio.setAttribute('value', podcastId - 1);
+    nextAudio.setAttribute('value', next - 1);
+    podcastImg.src = '/audio/' + prevPodcast.photo;
+    podcastName.textContent = prevPodcast.name;
+    podcastArtist.textContent = prevPodcast.firstName + ' ' + prevPodcast.lastName;
+    audio.src = '/audio/' + prevPodcast.audio;
+    playMusic();
+  } else {
+    prevAudio.setAttribute('value', allPodcasts.length);
+  }
+  // };
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  podcastImg.src = '/audio/' + allPodcasts[0].photo;
+    podcastName.textContent = allPodcasts[0].name;
+    podcastArtist.textContent = allPodcasts[0].firstName + ' ' + allPodcasts[0].lastName;
+    audio.src = '/audio/' + allPodcasts[0].audio;
+});

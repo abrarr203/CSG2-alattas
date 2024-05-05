@@ -83,6 +83,7 @@
                 </div>
             </div>
         </div>
+        <p class="hidden" data-podcastList="<%= JSON.stringify(podcasts) %>" id="allPodcasts"></p>
         <!-- {{!----------------------------------------------------left-Content---------------------------------------------------------}} -->
         <div class="left-content">
             <div class="profile-section">
@@ -127,11 +128,11 @@
                     </div>
                 </div>
                 <div class="controls">
-                    <i id="prev" class="bx bx-left-arrow"></i>
+                    <i id="prev" value='<%= podcasts[0].podcastId %>' class="bx bx-left-arrow"></i>
                     <div class="play-button">
                         <i id="play-button" class="bx bx-play-circle"></i>
                     </div>
-                    <i id="next" class="bx bx-right-arrow"></i>
+                    <i id="next" value='<%= podcasts[1].podcastId %>' class="bx bx-right-arrow"></i>
                 </div>
             </div>
             <div class="total-section">
