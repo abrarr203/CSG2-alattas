@@ -50,12 +50,11 @@ router.post('/signup', registrationController.createUsers);
 router.get('/home', loginController.isLoggedIn, homeController.showHome);
 router.post('/home/:userId/addLike/:podcastId', loginController.isLoggedIn, podcastController.addLike);
 router.get('/search', loginController.isLoggedIn, SearchController.search)
-router.get('/home/podcasts', podcastController.getPodcastById)
-//router.get('/home/:podcastId')
+router.get('/home/podcast', SearchController.result)
 
-router.get('/profile/:userId', loginController.isLoggedIn, userController.showProfilePage)
-router.post('/update', loginController.isLoggedIn, upload.single('photoo'), userController.updateProfile)
-router.post('/post', loginController.isLoggedIn, post.fields([{name:'podcast',maxCount:1},{name:'photo',maxCount:1}]), podcastController.createPodcast)
+router.get('/profile/:userId', loginController.isLoggedIn, userController.showProfilePage);
+router.post('/update', loginController.isLoggedIn, upload.single('photoo'), userController.updateProfile);
+router.post('/post', loginController.isLoggedIn, post.fields([{name:'podcast',maxCount:1},{name:'photo',maxCount:1}]), podcastController.createPodcast);
 
 router.get('/logout', loginController.logout);
 

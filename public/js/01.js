@@ -37,6 +37,10 @@ function login() {
       document.getElementById("popup").style.visibility = "visible" ;
       document.getElementById("popup").style.opacity = "1" ;
       document.getElementById("popup").style.transition = "0.5s" ;
+
+      document.getElementById('photo').setAttribute('required', '');
+      document.getElementById('file-input').setAttribute('required', '');
+      document.getElementById('podcastName').setAttribute('required', '');
     
     }
     
@@ -48,8 +52,11 @@ function login() {
       document.getElementById("mainwrapper").style.pointerEvents = "";
       document.getElementById("mainwrapper").style.userSelect = "";
       document.getElementById("mainwrapper").style.filter = "";
-    
-    
+
+      document.getElementById('photo').removeAttribute('required');
+      document.getElementById('file-input').removeAttribute('required');
+      document.getElementById('podcastName').removeAttribute('required');
+
     }
 
     //---------------------------------------js-for-user edit popup btns-form------------------------
@@ -62,6 +69,8 @@ function login() {
       document.getElementById("popup2").style.visibility = "visible" ;
       document.getElementById("popup2").style.opacity = "1" ;
       document.getElementById("popup2").style.transition = "0.5s" ;
+      var passwordElement = document.getElementById('password');
+      passwordElement.setAttribute('required', '');
     
     }
     function closeEditForm() {
@@ -72,8 +81,9 @@ function login() {
       document.getElementById("mainwrapper").style.pointerEvents = "";
       document.getElementById("mainwrapper").style.userSelect = "";
       document.getElementById("mainwrapper").style.filter = "";
-    
-    
+      var passwordElement = document.getElementById('password');
+      passwordElement.removeAttribute('required');
+
     }
     //----------------------------------------js-for post form btns------------------------------
     

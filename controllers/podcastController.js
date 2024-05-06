@@ -28,15 +28,6 @@ class PodcastController{
             return error;
         }
     }
-    static async getPodcastById(req,res){
-        const podcastId = req.params.podcastId;
-        try {
-            const podcastData = await podcastModel.getAllPodcasts;
-            res.json(podcastData)
-          } catch (error) {
-            res.status(500).json({ error: 'Failed to retrieve the podcast.' });
-          }
-    }
 
 }
 

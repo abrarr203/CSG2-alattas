@@ -65,7 +65,7 @@
     <form action="/post" method="post" enctype="multipart/form-data" >
         <div class="container" id="popup">
             <div class="upload-btn">
-              <input type="file" id="file-input" accept="audio/*"  class="input-aud" name="podcast" />
+              <input type="file" id="file-input" accept="audio/*"  class="input-aud" name="podcast"/>
               <label for="file-input" class="f-input">
                  <i class="fa-solid fa-arrow-up-from-bracket"></i>
                  Choose Files To Upload
@@ -83,12 +83,12 @@
               </div>
               <div  class="tow">
                   <img id="output" class="img-display" />	
-                  <input type="text" placeholder="enter name of podcast" class="name" name="name">
+                  <input type="text" placeholder="enter name of podcast" id="podcastName" class="name" name="name">
               </div>
             </div>
             <div class="submit-btn">
               <input type="submit" class="bttn" value="Post+" id="submit">
-              <button class="bttn" id="close" onclick="closeForm()">Cancel</button>
+              <button type="button" class="bttn" id="close" onclick="closeForm()">Cancel</button>
             </div>
         </div>
     </form>
@@ -127,17 +127,14 @@
                     <% } %>
                     <i class="fa-solid fa-b"></i>
                 </div>
+                <p>*Enter your current password, or new password*</p>
                 <div class="input-box">
                     <input type="password" class="input-field" id="password" name="password" placeholder="Password" max="20" min="8">
                     <i class="bx bx-lock-alt"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" class="input-field" id="configPass" name="configPass" placeholder="Confirm Password">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
                     <input type="submit" class="submit" value="OK">
-                    <input type="button" class="submit" value="Cancle" onclick="closeEditForm()">
+                    <input type="button" class="submit" value="Cancel" onclick="closeEditForm()">
                 </div>
         </div>
     </form>

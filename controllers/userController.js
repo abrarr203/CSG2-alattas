@@ -18,12 +18,13 @@ class UserController{
     }
 
     static async updateProfile(req, res){
+        let photo = req.file ? req.file.originalname : req.session.user.photo;
         let updatedData = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.session.user.email,
             password: req.body.password,
-            photo: req.file.originalname,
+            photo: photo,
             bio: req.body.bio
         }
         try{

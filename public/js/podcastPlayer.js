@@ -97,7 +97,7 @@ function formatTime(time) {
     return "00:00";
 }
 
-const allPodcasts =JSON.parse(document.getElementById('allPodcasts').getAttribute('data-podcastList'));
+const allPodcasts = JSON.parse(document.getElementById('allPodcasts').getAttribute('data-podcastList'));
 
 const nextAudio = document.getElementById('next');
 const prevAudio = document.getElementById('prev');
@@ -140,8 +140,20 @@ prevAudio.addEventListener('click', (event)=> {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  podcastImg.src = '/audio/' + allPodcasts[0].photo;
+  const podcastId = Number( localStorage.getItem('searchPodcast'));
+  const searchPodcast = allPodcasts.find(podcast => podcast.podcastId === podcastId);
+
+  if(searchPodcast) {
+    podcastImg.src = '/audio/' + searchPodcast.photo;
+    podcastName.textContent = searchPodcast.name;
+    podcastArtist.textContent = searchPodcast.firstName + ' ' + allPodcasts.lastName;
+    audio.src = '/audio/' + searchPodcast.audio;
+    playMusic();
+  } else {
+    podcastImg.src = '/audio/' + allPodcasts[0].photo;
     podcastName.textContent = allPodcasts[0].name;
     podcastArtist.textContent = allPodcasts[0].firstName + ' ' + allPodcasts[0].lastName;
     audio.src = '/audio/' + allPodcasts[0].audio;
+  }
+  localStorage.removeItem('searchPodcast');
 });
